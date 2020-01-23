@@ -1,28 +1,37 @@
 var path = require('path')
 var webpack = require('webpack')
 var merge = require('webpack-merge')
-var baseWebpackConfig = require('./webpack.config')
-var webpackConfig = merge(baseWebpackConfig, {
+var UglifyJsPlugin = require("uglifyjs-3-webpack-plugin")
+const VueSSRServerPlugin = require('vue-server-renderer/server-plugin')
+const nodeExternals = require('webpack-node-externals');
+
+var baseConfig = require('./webpack.base.config.js')
+
+var webpackConfig = merge(baseConfig, {
   target: 'node',
-  entry: {
-    app: './src/server-entry.js'
-  },
-  devtool: false,
+  entry: './src/server-entry.js',
+  devtool: 'source-map',
   output: {
-    path: path.resolve(__dirname, './dist'),
-    filename: 'server.bundle.js',
     libraryTarget: 'commonjs2'
   },
-  externals: Object.keys(require('./package.json').dependencies),
+  externals: nodeExternals({
+    whitelist: /\.css$/,
+  }),
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env': 'production'
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
+    new VueSSRServerPlugin()
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        loader: 'css-loader',
+        options: {
+          modules: {
+            localIdentName: '[local]_[hash:base64:8]',
+          }
+        }
       }
-    })
-  ]
+    ]
+  }
 })
 module.exports = webpackConfig

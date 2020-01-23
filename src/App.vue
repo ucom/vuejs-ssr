@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    Vuejs with server side rendering
+    Vuejs with server side rendering.
     <p>
       <router-link to="/">Go To Home</router-link>
       <router-link to="/about">Go To About</router-link>

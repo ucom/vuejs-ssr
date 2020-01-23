@@ -1,11 +1,16 @@
 <!doctype html>
 <html lang="en">
 <head>
-  {{{ meta }}}
-  <title>{{ title }}</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Title</title>
 </head>
 <body>
-    <!--vue-ssr-outlet-->
+  <div id="app"><!--vue-ssr-outlet--></div>
+  {{{ renderScripts() }}}
+  <!--
   <script src="dist/build.js"></script>
+	-->
+
 </body>
 </html>

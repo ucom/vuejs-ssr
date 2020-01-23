@@ -1,4 +1,4 @@
-import { createApp } from './main.js';
+import { createApp } from './app.js';
 
 export default context => {
   // since there could potentially be asynchronous route hooks or components,
@@ -6,9 +6,11 @@ export default context => {
   // everything is ready before rendering.
   return new Promise((resolve, reject) => {
     const { app, router } = createApp();
+    const meta = app.$meta();
 
     // set server-side router's location
     router.push(context.url);
+    context.meta = meta;
       
     // wait until router has resolved possible async components and hooks
     router.onReady(() => {
@@ -19,7 +21,7 @@ export default context => {
       }
   
       // the Promise should resolve to the app instance so it can be rendered
-      resolve(app);
+      return resolve(app);
     }, reject);
   });
 }
