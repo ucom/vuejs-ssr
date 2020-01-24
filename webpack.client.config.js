@@ -11,32 +11,37 @@ let config = merge(baseConfig, {
 	entry: './src/client-entry.js',
 	plugins: [new VueSSRClientPlugin()],
 	output: {
-		path: path.resolve('./dist/'),
+	  path: path.resolve('./dist/'),
 	  publicPath: '/dist/',
 	  filename: '[name].[hash:8].js',
 	},
 	module: {
+	    // rules: [
+	    //   {
+	    //     test: /\.css$/,
+	    //     use: [
+	    //       isProduction ? MiniCssExtractPlugin.loader : ['vue-style-loader', 'css-loader'],
+	    //       {
+	    //         loader: 'css-loader',
+	    //         options: {
+	    //           modules: {
+	    //             localIdentName: '[local]_[hash:base64:8]',
+	    //           },
+	    //         },
+	    //       },
+	    //     ],
+	    //   },
+	    // ],
 	    rules: [
 	      {
 	        test: /\.css$/,
-	        use: [
-	          isProduction ? MiniCssExtractPlugin.loader : 'vue-style-loader',
-	          {
-	            loader: 'css-loader',
-	            options: {
-	              modules: {
-	                localIdentName: '[local]_[hash:base64:8]',
-	              },
-	            },
-	          },
-	        ],
-	      },
-	    ],
+	        use: ['vue-style-loader', 'css-loader']
+	      }
+	    ]
 	},
 });
 
 if (!isProduction) {
-  console.log('development mode')
   config = merge(config, {
     output: {
       filename: '[name].js',
@@ -45,7 +50,6 @@ if (!isProduction) {
     plugins: [new webpack.HotModuleReplacementPlugin()],
     devtool: 'source-map',
     devServer: {
-      clientLogLevel: 'debug',
       writeToDisk: true,
       contentBase: path.resolve(__dirname, 'dist'),
       publicPath: 'http://localhost:9999/dist/',
@@ -59,7 +63,6 @@ if (!isProduction) {
     },
   });
 } else {
-  console.log('production mode')
   config = merge(config, {
     plugins: [
       new MiniCssExtractPlugin({

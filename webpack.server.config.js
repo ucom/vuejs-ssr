@@ -1,7 +1,7 @@
-var path = require('path')
-var webpack = require('webpack')
-var merge = require('webpack-merge')
-var UglifyJsPlugin = require("uglifyjs-3-webpack-plugin")
+const path = require('path')
+const webpack = require('webpack')
+const merge = require('webpack-merge')
+const UglifyJsPlugin = require("uglifyjs-3-webpack-plugin")
 const VueSSRServerPlugin = require('vue-server-renderer/server-plugin')
 const nodeExternals = require('webpack-node-externals');
 
@@ -21,15 +21,21 @@ var webpackConfig = merge(baseConfig, {
     new VueSSRServerPlugin()
   ],
   module: {
+    // rules: [
+    //   {
+    //     test: /\.css$/,
+    //     loader: 'css-loader',
+    //     options: {
+    //       modules: {
+    //         localIdentName: '[local]_[hash:base64:8]',
+    //       }
+    //     }
+    //   }
+    // ]
     rules: [
       {
         test: /\.css$/,
-        loader: 'css-loader',
-        options: {
-          modules: {
-            localIdentName: '[local]_[hash:base64:8]',
-          }
-        }
+        use: ['vue-style-loader', 'css-loader']
       }
     ]
   }
