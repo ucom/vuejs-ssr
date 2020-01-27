@@ -9,7 +9,9 @@ const isProduction = process.env.NODE_ENV === 'production';
 
 let config = merge(baseConfig, {
 	entry: './src/client-entry.js',
-	plugins: [new VueSSRClientPlugin()],
+	plugins: [
+		new VueSSRClientPlugin(),
+		],
 	output: {
 	  path: path.resolve('./dist/'),
 	  publicPath: '/dist/',

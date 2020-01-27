@@ -1,9 +1,12 @@
 import { createApp } from './app.js';
 
-const { app, router } = createApp()
+const { app, router, store } = createApp()
 
 // this assumes App.vue template root element has `id="app"`
 router.onReady(() => {
+  if (window.__INITIAL_STATE__) {
+    store.replaceState(window.__INITIAL_STATE__);
+  }
   app.$mount('#app')
 });
 
