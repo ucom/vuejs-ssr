@@ -1,9 +1,10 @@
-var path = require('path')
-var webpack = require('webpack')
-var merge = require('webpack-merge')
-var UglifyJsPlugin = require("uglifyjs-3-webpack-plugin")
-var OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const path = require('path')
+const webpack = require('webpack')
+const merge = require('webpack-merge')
+const UglifyJsPlugin = require("uglifyjs-3-webpack-plugin")
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const isProduction = process.env.NODE_ENV === 'production';
 
@@ -33,6 +34,7 @@ let config = {
     ]
   },
   plugins: [
+    new CleanWebpackPlugin(),
     new VueLoaderPlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),

@@ -10,7 +10,7 @@ export default {
 
 <style>
 .home {
-	border:2px dotted red;
+	border:3px dotted red;
 	padding:10px;
 }
 </style>
