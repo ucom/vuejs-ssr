@@ -4,8 +4,8 @@ import VueMeta from 'vue-meta';
 
 import routes from './routes';
 
-import Home from './components/Home.vue';
-import About from './components/About.vue';
+const Home = () => import('./components/Home.vue');
+const About = () => import('./components/About.vue');
 
 Vue.use(Router);
 Vue.use(VueMeta);
