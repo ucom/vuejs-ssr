@@ -1,20 +1,20 @@
 <template>
-<div>
-	<div class="home">Homepage</div>
+  <div>
+  	<div class="home">Homepage</div>
 
-    <div class="controls">
-      <input @value="title" @input="onChangeTitle" />
-      <button @click="addItem">Add item</button>
-      <button @click="addAsyncItem">Add item after one second</button>
-    </div>
+      <div class="controls">
+        <input @value="title" @input="onChangeTitle" />
+        <button @click="addItem">Add item</button>
+        <button @click="addAsyncItem">Add item after one second</button>
+      </div>
 
-    <div v-for="item in items" v-bind:key="item.id" class="item">
-      <span>{{ item.title }}</span>
-      <span>
-        <button @click="onRemoveItem" :data-id="item.id">Remove</button>
-      </span>
-    </div>
-</div>
+      <div v-for="item in items" v-bind:key="item.id" class="item">
+        <span>{{ item.title }}</span>
+        <span>
+          <button @click="onRemoveItem" :data-id="item.id">Remove</button>
+        </span>
+      </div>
+  </div>
 </template>
 
 <script>
@@ -36,7 +36,7 @@ export default {
   },
   data() {
     return {
-      title: 'Default title',
+      title: 'Project title',
     };
   },
   computed: {
@@ -59,7 +59,6 @@ export default {
         id: Math.floor(Math.random() * 100),
         title: this.$data.title,
       };
-
       this.$store.dispatch(MAIN__ITEM_ADD_ASYNC, { item });
     },
     addItem() {
@@ -67,7 +66,6 @@ export default {
         id: Math.floor(Math.random() * 100),
         title: this.$data.title,
       };
-
       return this.$store.commit(MAIN__ITEM_ADD, { item });
     },
     onChangeTitle(e) {
@@ -82,8 +80,8 @@ export default {
 </script>
 
 <style>
-.home {
-	border:1px dotted red;
-	padding:10px;
-}
+  .home {
+  	border:1px dotted red;
+  	padding:10px;
+  }
 </style>

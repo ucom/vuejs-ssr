@@ -8,7 +8,7 @@ const baseConfig = require('./webpack.base.config.js');
 const isProduction = process.env.NODE_ENV === 'production';
 
 let config = merge(baseConfig, {
-	entry: './src/client-entry.js',
+	entry: ['babel-polyfill', './src/client-entry.js'],
 	plugins: [
 		new VueSSRClientPlugin(),
 		],

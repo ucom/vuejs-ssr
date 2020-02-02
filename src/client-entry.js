@@ -1,4 +1,5 @@
 import { createApp } from './app.js';
+import createPersistedState from 'vuex-persistedstate'
 
 const { app, router, store } = createApp()
 
@@ -6,6 +7,20 @@ const { app, router, store } = createApp()
 router.onReady(() => {
   if (window.__INITIAL_STATE__) {
     store.replaceState(window.__INITIAL_STATE__);
+    // override store with data from persistedstate
+    createPersistedState({
+      // storage: window.sessionStorage,
+      paths: ['main'],
+      // rehydrated: (state) => {
+      //  console.log('rehydrated')
+      //  console.log('state',state)
+      // },
+      // arrayMerger: (store, saved) => {
+      //  console.log('store', store)
+      //  console.log('saved', saved)
+      //  return saved
+      // }
+   })(store);
   }
   app.$mount('#app')
 });

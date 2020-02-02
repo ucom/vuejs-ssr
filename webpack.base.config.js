@@ -49,17 +49,3 @@ if (isProduction) {
 }
 
 module.exports = config;
-
-
-
-rules: [
-        {
-          test: /\.css$/,
-          use: ['vue-style-loader', 'css-loader'],
-          options:{
-            modules: {
-                localIdentName: '[local]_[hash:base64:8]',
-              },
-          }
-        }
-      ]

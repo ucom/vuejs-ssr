@@ -10,9 +10,8 @@ Vue.use(Vuex);
 export function createStore() {
   return new Vuex.Store({
     strict: !config.isProduction,
-
     modules: {
-      main,
+     	main,
     },
   });
 }

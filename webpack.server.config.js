@@ -9,7 +9,7 @@ var baseConfig = require('./webpack.base.config.js')
 
 var webpackConfig = merge(baseConfig, {
   target: 'node',
-  entry: './src/server-entry.js',
+  entry: ['babel-polyfill', './src/server-entry.js'],
   devtool: 'source-map',
   output: {
     libraryTarget: 'commonjs2'
